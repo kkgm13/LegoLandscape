@@ -58,21 +58,23 @@
 			margin: 1%;
 		}
 	</style>
-	<body onload="start()">
-		<canvas id="glCanvas" width="800" height="600">
-			Your browser doesn't appear to support the 
-		<code>&lt;canvas&gt;</code> element.
-	</canvas>
+	<script src="scripts/Main.js"></script>
+		
 </body>
 </head>
-<body>
-	<canvas id="thisCanvas" width="1000" height="500"></canvas>
+<body onload="start()">
+
+	<canvas id="glCanvas" width="1000" height="500">
+			Your browser doesn't appear to support the 
+			<code>&lt;canvas&gt;</code> element.
+	</canvas>
 	<script>
 		var canvas = document.getElementById("thisCanvas");
 		var ctx = canvas.getContext("2d");
 		ctx.fillStyle = "#FF0000";
 		ctx.fillRect(0,0,1000,500);
 	</script>
+	
 	<header id="head">
 		<h1>LegoLandScape</h1>
 	</header>
