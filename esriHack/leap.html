@@ -4,8 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>LegoLandscape</title>
-    <script src="http://js.leapmotion.com/leap-0.6.3.js"></script>
-    <script src="getPos.js"></script>
+    <script src="//js.leapmotion.com/leap-0.6.3.js"></script>
     <style>
         html, body, #viewDiv {
             padding: 0;
@@ -30,8 +29,8 @@
                 handString += "Palm position: " + Leap.vec3.str(getPos()) + " mm<br />";
                 handString += "Palm velocity: " + Leap.vec3.str(hand.palmVelocity) + " mm/s<br />";
             }
-            update();
         }
+        update();
     </script>
 </head>
 <body>
