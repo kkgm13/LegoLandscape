@@ -5,6 +5,7 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>LegoLandscape</title>
     <script src="http://js.leapmotion.com/leap-0.6.3.js"></script>
+    <script src="getPos.js"></script>
     <style>
         html, body, #viewDiv {
             padding: 0;
@@ -24,10 +25,10 @@
             var handString = "";
             if (handNo > 0) {
                 var hand = frame.hands[0];
-                handString += "Direction: " + vectorToString(hand.direction, 2) + "<br />";
-                handString += "Palm normal: " + vectorToString(hand.palmNormal, 2) + "<br />";
-                handString += "Palm position: " + vectorToString(hand.palmPosition) + " mm<br />";
-                handString += "Palm velocity: " + vectorToString(hand.palmVelocity) + " mm/s<br />";
+                handString += "Direction: " + hand.direction, 2 + "<br />";
+                handString += "Palm normal: " + hand.palmNormal, 2 + "<br />";
+                handString += "Palm position: " + getPos() + " mm<br />";
+                handString += "Palm velocity: " + hand.palmVelocity + " mm/s<br />";
             }
             update();
         }
