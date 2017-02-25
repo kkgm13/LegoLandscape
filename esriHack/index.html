@@ -4,51 +4,78 @@
 	<meta charset="utf-8">
 	<title>LegoLandScape</title>
 	<style type="text/css">
-	html,body {
-		background: #fff;
-		height: 100%;
-		margin: 0; 
-		padding: 0;
-		overflow: hidden;
-	}
-	canvas {
-		position:absolute;
-		top:0;
-		left:0;
-	}
-		
-	p {
-		position:absolute;
-		left:0;
-		right:0;
-		text-align:center;
-		margin:0;
-		padding:0.5em 5em;
-		background:rgba(240,240,240,0.7) 
-	}
-	#head {
-		top:0;
-		border-bottom:1px solid #999;
-	}
-	#foot {
-		bottom:0;
-		font-size:85%;
-		border-top:1px solid #999;
-		font-style:italic;
-	}
-</style>
+		body {
+			background: #fff;
+			height: 100%;
+			margin: 0; 
+			padding: 0;
+			overflow: hidden;
+			z-index: auto;
+		}
+		canvas {
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: -1;
+			border: 3px solid #00ff00;
+		}
+			
+		p {
+			position: relative;
+			left: 0;
+			right: 0;
+			text-align: center;
+			margin: 0;
+			padding: 0.5em 5em;
+			background: rgba(240,240,240,0.7) 
+		}
+		#head {
+			top: 0;
+			border-bottom: 1px solid #999;
+			text-align: center;
+		}
+
+		#head>h1{
+			text-align: left;
+		}
+
+		#foot {
+			bottom: 0;
+			font-size: 85%;
+			border-top: 1px solid #999;
+			font-style: italic;
+		}
+
+		#contents{
+			display: flex;
+			flex-wrap: wrap;
+			width: 100%;
+			align-items: 
+		}
+
+		.content{
+			width: 7.4%;
+			margin: 1%;
+		}
+	</style>
 </head>
 <body>
-	<canvas width="1000" height="500"></canvas>
-	<header id="head">LegoLandScape</header>
+	<canvas id="thisCanvas" width="1000" height="500"></canvas>
+	<script>
+		var canvas = document.getElementById("thisCanvas");
+		var ctx = canvas.getContext("2d");
+		ctx.fillStyle = "#FF0000";
+		ctx.fillRect(0,0,1000,500);
+	</script>
+	<header id="head">
+		<h1>LegoLandScape</h1>
+	</header>
 	<footer id="foot">
 		<section id="contents">
-			<div class="content">
-				<p>Test 1</p>
-			</div>
-			<div class="content">
-				<p>Test 1</p>
-			</div>
+			<p class="content">Test 1</p>
+			<p class="content">Test 2</p>
+			<p class="content">Test 3</p>
+			<p class="content">Test 4</p>
 		</section>
 	</footer>
 </body>
