@@ -2,7 +2,11 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
 	<title>LegoLandScape</title>
+	<header id="head">
+		<h1>LegoLandScape</h1>
+	</header>
 	<style type="text/css">
 		body {
 			background: #fff;
@@ -13,11 +17,12 @@
 			z-index: auto;
 		}
 		canvas {
-			position: absolute;
+			position: relative;
 			top: 0;
 			left: 0;
 			z-index: -1;
 			border: 3px solid #00ff00;
+			float: left;
 		}
 			
 		p {
@@ -33,11 +38,11 @@
 			top: 0;
 			border-bottom: 1px solid #999;
 			text-align: center;
+			z-index: 1;
 		}
 
 		#head>h1{
 			text-align: left;
-			color: white;
 		}
 
 		#foot {
@@ -45,28 +50,30 @@
 			font-size: 85%;
 			border-top: 1px solid #999;
 			font-style: italic;
+			z-index: 1;
 		}
 
 		#contents{
 			display: flex;
 			flex-wrap: wrap;
 			width: 100%;
-			align-items: 
 		}
 
 		.content{
-			width: 7.4%;
+			width: 6.4%;
 			margin: 1%;
 		}
 	</style>
 	<script src="scripts/Main.js"></script>
 </head>
 <body onload="start()">
-
-	<canvas id="glCanvas" width="750" height="500">
-			Your browser doesn't appear to support the 
-			<code>&lt;canvas&gt;</code> element.
+	<!--Web GL Canvas-->
+	<canvas id="glCanvas" width="570" height="500">
+		Your browser doesn't appear to support the <code>&lt;canvas&gt;</code> element.
 	</canvas>
+	
+	<!--Second HTML5 Canvas-->
+	<canvas id="thisCanvas" width=570 height="500"></canvas>
 	<script>
 		var canvas = document.getElementById("thisCanvas");
 		var ctx = canvas.getContext("2d");
@@ -74,16 +81,14 @@
 		ctx.fillRect(0,0,1000,500);
 	</script>
 	
-	<header id="head">
-		<h1>LegoLandScape</h1>
-	</header>
+	<!--Header and Footer Information-->
 	<footer id="foot">
 		<section id="contents">
 			<p class="content">Test 1</p>
 			<p class="content">Test 2</p>
 			<p class="content">Test 3</p>
 			<p class="content">Test 4</p>
+			<p class="content">Test 5</p>
 		</section>
 	</footer>
 </body>
-</html>
