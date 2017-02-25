@@ -25,10 +25,10 @@
             var handString = "";
             if (handNo > 0) {
                 var hand = frame.hands[0];
-                handString += "Direction: " + hand.direction, 2 + "<br />";
-                handString += "Palm normal: " + hand.palmNormal, 2 + "<br />";
-                handString += "Palm position: " + getPos() + " mm<br />";
-                handString += "Palm velocity: " + hand.palmVelocity + " mm/s<br />";
+                handString += "Direction: " + Leap.vec3.str(hand.direction, 2) + "<br />";
+                handString += "Palm normal: " + Leap.vec3.str(hand.palmNormal, 2) + "<br />";
+                handString += "Palm position: " + Leap.vec3.str(getPos()) + " mm<br />";
+                handString += "Palm velocity: " + Leap.vec3.str(hand.palmVelocity) + " mm/s<br />";
             }
             update();
         }
