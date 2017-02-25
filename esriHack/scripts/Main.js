@@ -1,13 +1,18 @@
 var gl; // A global variable for the WebGL context
 
-function start() {
+const BRICK_WIDTH = 2;
+const BRICK_HEIGHT = 2;
+
+function start()
+{
     var canvas = document.getElementById('glCanvas');
 
     // Initialize the GL context
     gl = initWebGL(canvas);
 
     // Only continue if WebGL is available and working
-    if (!gl) {
+    if (!gl)
+    {
         return;
     }
 
@@ -21,18 +26,29 @@ function start() {
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 }
 
-function initWebGL(canvas) {
+function initWebGL(canvas)
+{
     gl = null;
 
     // Try to grab the standard context. If it fails, fallback to experimental.
     gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
 
     // If we don't have a GL context, give up now
-    if (!gl) {
+    if (!gl)
+    {
         alert('Unable to initialize WebGL. Your browser may not support it.');
     }
 
     return gl;
 }
 
+function drawCuboid(x, y, h)
+{
+    
+}
+
+function drawLegoMap(heightmap)
+{
+
+}
 
