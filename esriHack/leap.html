@@ -18,15 +18,18 @@
             host: '127.0.0.1',
             port: 6437
         });
-        var frame = controller.frame();
-        var handNo = frame.hands.length;
-        var handString = "";
-        if (handNo > 0) {
-            var hand = frame.hands[i];
-            handString += "Direction: " + vectorToString(hand.direction, 2) + "<br />";
-            handString += "Palm normal: " + vectorToString(hand.palmNormal, 2) + "<br />";
-            handString += "Palm position: " + vectorToString(hand.palmPosition) + " mm<br />";
-            handString += "Palm velocity: " + vectorToString(hand.palmVelocity) + " mm/s<br />";
+        function update() {
+            var frame = controller.frame();
+            var handNo = frame.hands.length;
+            var handString = "";
+            if (handNo > 0) {
+                var hand = frame.hands[0];
+                handString += "Direction: " + vectorToString(hand.direction, 2) + "<br />";
+                handString += "Palm normal: " + vectorToString(hand.palmNormal, 2) + "<br />";
+                handString += "Palm position: " + vectorToString(hand.palmPosition) + " mm<br />";
+                handString += "Palm velocity: " + vectorToString(hand.palmVelocity) + " mm/s<br />";
+            }
+            update();
         }
     </script>
 </head>
