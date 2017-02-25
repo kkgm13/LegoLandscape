@@ -21,8 +21,8 @@
 			top: 0;
 			left: 0;
 			z-index: -1;
-			border: 3px solid #00ff00;
 			float: left;
+			border: 1px solid #ffffff
 		}
 			
 		p {
@@ -60,7 +60,7 @@
 		}
 
 		.content{
-			width: 6.4%;
+			width: 8.2%;
 			margin: 1%;
 		}
 	</style>
@@ -68,12 +68,12 @@
 </head>
 <body onload="start()">
 	<!--Web GL Canvas-->
-	<canvas id="glCanvas" width="590" height="500">
+	<canvas id="glCanvas" width="699" height="500">
 		Your browser doesn't appear to support the <code>&lt;canvas&gt;</code> element.
 	</canvas>
 	
 	<!--Second HTML5 Canvas-->
-	<canvas id="thisCanvas" width=590 height="500"></canvas>
+	<canvas id="thisCanvas" width="699" height="500"></canvas>
 	<script>
 		var canvas = document.getElementById("thisCanvas");
 		var ctx = canvas.getContext("2d");
