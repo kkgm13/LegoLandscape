@@ -1,5 +1,5 @@
-var WIDTH = 699;
-var HEIGHT = 500;
+var WIDTH = 1000;
+var HEIGHT = 700;
 
 const BRICK_WIDTH = 4;
 const BRICK_HEIGHT = 2;
