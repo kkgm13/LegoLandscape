@@ -7,44 +7,39 @@ const BRICK_DEPTH = 4;
 
 const MAX_HEIGHT = 600; //600 will be good
 
-var scene;
-var renderer;
-var camera;
+var scene = new THREE.Scene();
+var camera = new THREE.PerspectiveCamera(75, WIDTH / HEIGHT, 0.1, 1000);
 
-var init = function () {
-    var scene = new THREE.Scene();
-    var camera = new THREE.PerspectiveCamera(75, WIDTH / HEIGHT, 0.1, 1000);
+light = new THREE.DirectionalLight(0xffffff);
+light.position.set(1, 1, 1);
+scene.add(light);
 
-    light = new THREE.DirectionalLight(0xffffff);
-    light.position.set(1, 1, 1);
-    scene.add(light);
+light = new THREE.DirectionalLight(0x002288);
+light.position.set(-1, -1, -1);
+scene.add(light);
 
-    light = new THREE.DirectionalLight(0x002288);
-    light.position.set(-1, -1, -1);
-    scene.add(light);
+light = new THREE.AmbientLight(0x222222);
+scene.add(light);
 
-    light = new THREE.AmbientLight(0x222222);
-    scene.add(light);
+var controls = new THREE.OrbitControls(camera);
+controls.addEventListener('change', render);
 
-    var controls = new THREE.OrbitControls(camera);
-    controls.addEventListener('change', render);
+var renderer = new THREE.WebGLRenderer();
+renderer.setSize(WIDTH, HEIGHT);
+document.body.appendChild(renderer.domElement);
 
-    var renderer = new THREE.WebGLRenderer();
-    renderer.setSize(WIDTH, HEIGHT);
-    document.body.appendChild(renderer.domElement);
-
-    camera.position.z = 50;
-}
+camera.position.z = 50;
 
 var generateColour = function (height) {
     var colourInt = (16777214 * height) / MAX_HEIGHT;
     return colourInt.toString(16);
 }
 
-var getHexColour = function (rgbColour) {
+var getHexColour = function(rgbColour)
+{
     hexColour = '';
 
-    for (var i = 0; i < 3; i++) {
+    for(var i = 0; i < 3; i++) {
         if (rgbColour[i].toString(16).length == 1) {
             hexColour += '0';
             hexColour += rgbColour[i].toString(16);
@@ -105,11 +100,12 @@ var drawLegoLandscape = function (map, map2, size) {
 
                 number = Math.ceil(height - number);
 
-                if (number < 1) {
+                if(number < 1)
+                {
                     number = 1;
                 }
 
-                for (var k = 0; k < number; k++) {
+                for(var k = 0; k < number; k++) {
                     var material = new THREE.MeshLambertMaterial({
                         color: parseInt(getHexColour(colormap[cc]), 16),
                         shading: THREE.FlatShading
@@ -119,7 +115,7 @@ var drawLegoLandscape = function (map, map2, size) {
                     var cube = new THREE.Mesh(geometry, material);
 
                     cube.position.x = ii * BRICK_WIDTH;
-                    cube.position.y = (Math.floor(height) * 2.0) - (k * BRICK_HEIGHT);
+                    cube.position.y = (Math.floor(height) * 2.0) - (k*BRICK_HEIGHT);
                     cube.position.z = jj * BRICK_DEPTH;
                     cube.updateMatrix();
                     cube.matrixAutoUpdate = false;
@@ -198,7 +194,7 @@ var getColours = function (img) {
     return data;
 }
 
-var start = function (imgPath, colorPath) {
+var start = function (imgPath, colourPath) {
     var loader = new THREE.ImageLoader();
 
     loader.load(
@@ -212,7 +208,7 @@ var start = function (imgPath, colorPath) {
 
             loader.load(
                 // resource URL
-                colorPath,
+                colourPath,
                 // Function when resource is loaded
                 function (image2) {
                     colourImage = image2;
@@ -245,6 +241,3 @@ var render = function () {
 
     renderer.render(scene, camera);
 };
-
-init();
-
