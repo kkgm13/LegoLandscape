@@ -35,12 +35,30 @@ var generateColour = function (height) {
     return colourInt.toString(16);
 }
 
-var drawLegoLandscape = function (map, size) {
+var getHexColour = function(rgbColour)
+{
+    hexColour = '';
+
+    for(var i = 0; i < 3; i++) {
+        if (rgbColour[i].toString(16).length == 1) {
+            hexColour += '0';
+            hexColour += rgbColour[i].toString(16);
+        } else {
+            hexColour += rgbColour[i].toString(16);
+        }
+    }
+
+    return hexColour;
+}
+
+var drawLegoLandscape = function (map, map2, size) {
 
     var ii = 0;
     var jj = 0;
+    var cc = 0;
 
     var heightmap = map;
+    var colormap = map2;
     var s = size;
 
     for (var j = 0; j < size; j++) {
@@ -89,7 +107,7 @@ var drawLegoLandscape = function (map, size) {
 
                 for(var k = 0; k < number; k++) {
                     var material = new THREE.MeshLambertMaterial({
-                        color: parseInt(generateColour(height - (k*BRICK_HEIGHT)), 16),
+                        color: parseInt(getHexColour(colormap[cc]), 16),
                         shading: THREE.FlatShading
                     });
 
@@ -108,6 +126,8 @@ var drawLegoLandscape = function (map, size) {
 
                 ii = ii + 1;
 
+                cc++;
+
                 if (ii == s) {
                     ii = 0;
                     jj = jj + 1;
@@ -121,7 +141,7 @@ var drawLegoLandscape = function (map, size) {
 var getHeightData = function (img) {
 
     var canvas = document.createElement('canvas');
-    var sq = img.width
+    var sq = 64;
     canvas.width = sq;
     canvas.height = sq;
     var context = canvas.getContext('2d');
@@ -176,14 +196,35 @@ var getColours = function (img) {
 
 
 var loader = new THREE.ImageLoader();
-var imgPath = 'E_5_256.png';
+var imgPath = 'E_7_256.png';
+var colorPath = 'T_7_256.png';
 
 loader.load(
     // resource URL
     imgPath,
     // Function when resource is loaded
     function (image) {
-        drawLegoLandscape(getHeightData(image), image.width);
+        var heightmapImage = image;
+
+        var colourImage;
+
+        loader.load(
+            // resource URL
+            colorPath,
+            // Function when resource is loaded
+            function (image2) {
+                colourImage = image2;
+                drawLegoLandscape(getHeightData(heightmapImage), getColours(colourImage), image.width);
+            },
+            // Function called when download progresses
+            function (xhr) {
+
+            },
+            // Function called when download errors
+            function (xhr) {
+
+            }
+        );
     },
     // Function called when download progresses
     function (xhr) {
@@ -194,6 +235,10 @@ loader.load(
 
     }
 );
+
+
+
+
 
 var render = function () {
     requestAnimationFrame(render);
