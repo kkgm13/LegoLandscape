@@ -24,21 +24,12 @@
 
 	<button onclick="start('graphics/img/hE.png', 'graphics/img/hT.png')" id="start">Hoover Dam</button>
 
-	<button onclick="start('graphics/img/pE.png', 'graphics/img/pT.png')" id="start">Pyramids</button>
+	<button onclick="start('graphics/img/E_7_256.png', 'graphics/img/T_7_256.png')" id="start">Canyon2</button>
 
 	<button onclick="start('graphics/img/gcE.png', 'graphics/img/gcT.png')" id="start">Grand Canyon</button>
 	
-	<!--Second HTML5 Canvas-->
+	<button onclick="start('graphics/img/E_8_256.png', 'graphics/img/T_8_256.png')" id="start">Mountain Side</button>
 	
-	<div class="mapcanvas"> 
-		<canvas id="canvas" width:40% height:40%></canvas>
-		<script>
-			var canvas = document.getElementById("canvas");
-			var ctx = canvas.getContext("2d");
-			ctx.fillStyle = "#FF0000";
-			ctx.fillRect(0,0,1000,500);
-		</script>
-	</div>		
 	<div class="webcanvas">
 		<script src="scripts/three.min.js"></script>
 		<script src="scripts/OrbitControls.js"></script>
