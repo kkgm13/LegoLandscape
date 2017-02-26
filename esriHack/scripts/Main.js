@@ -5,21 +5,10 @@ const BRICK_WIDTH = 4;
 const BRICK_HEIGHT = 2;
 const BRICK_DEPTH = 4;
 
-const MAX_HEIGHT = 600; //600 will be good
+const MAX_HEIGHT = 300; //300 will be good
 
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(75, WIDTH / HEIGHT, 0.1, 1000);
-
-light = new THREE.DirectionalLight(0xffffff);
-light.position.set(1, 1, 1);
-scene.add(light);
-
-light = new THREE.DirectionalLight(0x002288);
-light.position.set(-1, -1, -1);
-scene.add(light);
-
-light = new THREE.AmbientLight(0x222222);
-scene.add(light);
 
 var controls = new THREE.OrbitControls(camera);
 controls.addEventListener('change', render);
@@ -28,18 +17,15 @@ var renderer = new THREE.WebGLRenderer();
 renderer.setSize(WIDTH, HEIGHT);
 document.body.appendChild(renderer.domElement);
 
-camera.position.z = 50;
-
 var generateColour = function (height) {
     var colourInt = (16777214 * height) / MAX_HEIGHT;
     return colourInt.toString(16);
 }
 
-var getHexColour = function(rgbColour)
-{
+var getHexColour = function (rgbColour) {
     hexColour = '';
 
-    for(var i = 0; i < 3; i++) {
+    for (var i = 0; i < 3; i++) {
         if (rgbColour[i].toString(16).length == 1) {
             hexColour += '0';
             hexColour += rgbColour[i].toString(16);
@@ -100,12 +86,11 @@ var drawLegoLandscape = function (map, map2, size) {
 
                 number = Math.ceil(height - number);
 
-                if(number < 1)
-                {
+                if (number < 1) {
                     number = 1;
                 }
 
-                for(var k = 0; k < number; k++) {
+                for (var k = 0; k < number; k++) {
                     var material = new THREE.MeshLambertMaterial({
                         color: parseInt(getHexColour(colormap[cc]), 16),
                         shading: THREE.FlatShading
@@ -115,7 +100,7 @@ var drawLegoLandscape = function (map, map2, size) {
                     var cube = new THREE.Mesh(geometry, material);
 
                     cube.position.x = ii * BRICK_WIDTH;
-                    cube.position.y = (Math.floor(height) * 2.0) - (k*BRICK_HEIGHT);
+                    cube.position.y = (Math.floor(height) * 2.0) - (k * BRICK_HEIGHT);
                     cube.position.z = jj * BRICK_DEPTH;
                     cube.updateMatrix();
                     cube.matrixAutoUpdate = false;
@@ -160,7 +145,7 @@ var getHeightData = function (img) {
     var j = 0;
     for (var i = 0; i < pix.length; i += (4)) {
         var all = pix[i] + pix[i + 1] + pix[i + 2];
-        data[j++] = all / 30;
+        data[j++] = all / 5;
     }
 
     return data;
@@ -195,6 +180,25 @@ var getColours = function (img) {
 }
 
 var start = function (imgPath, colourPath) {
+
+    scene.children.forEach(function (object) {
+        scene.remove(object);
+        renderer.deallocateObject(object);
+    });
+
+    var light = new THREE.DirectionalLight(0xffffff);
+    light.position.set(10, 10, 10);
+    scene.add(light);
+
+    var light = new THREE.DirectionalLight(0x002288);
+    light.position.set(10, 10, 10);
+    scene.add(light);
+
+    var light = new THREE.AmbientLight(0xaaaaaa);
+    scene.add(light);
+
+    camera.position.z = 50;
+
     var loader = new THREE.ImageLoader();
 
     loader.load(
