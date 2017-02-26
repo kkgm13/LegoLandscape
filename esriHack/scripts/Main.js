@@ -5,7 +5,7 @@ const BRICK_WIDTH = 4;
 const BRICK_HEIGHT = 2;
 const BRICK_DEPTH = 4;
 
-const MAX_HEIGHT = 30; //600 will be good
+const MAX_HEIGHT = 600; //600 will be good
 
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(75, WIDTH / HEIGHT, 0.1, 1000);
@@ -28,49 +28,107 @@ var renderer = new THREE.WebGLRenderer();
 renderer.setSize(WIDTH, HEIGHT);
 document.body.appendChild(renderer.domElement);
 
-camera.position.z = 5;
+camera.position.z = 50;
 
 var generateColour = function (height) {
-    var colourInt = (268435455 * height) / MAX_HEIGHT;
+    var colourInt = (16777214 * height) / MAX_HEIGHT;
     return colourInt.toString(16);
 }
 
-var drawLegoLandscape = function (heightmap, size) {
+var drawLegoLandscape = function (map, size) {
+
+    var ii = 0;
+    var jj = 0;
+
+    var heightmap = map;
+    var s = size;
 
     for (var j = 0; j < size; j++) {
         for (var i = 0; i < size; i++) {
-            //var geometry = new THREE.BoxGeometry( BRICK_WIDTH, heightmap[i][j], BRICK_DEPTH);
-
-            var cube = null;
+            //var geometry = new THREE.BoxGeometry( BRICK_WIDTH, heightmap[i][j], BRICK_DEPTH)
 
             var loader = new THREE.JSONLoader();
-            loader.load('./graphics/brick.json', function (geometry) {
+            loader.load('graphics/brick.json', function (geometry) {
+
+                var height = heightmap[jj*s + ii];
+
+                var number =  height - Math.min();
+
                 var material = new THREE.MeshLambertMaterial({
-                    color: generateColour(heightmap[i][j]),
+                    color: parseInt(generateColour(height), 16),
                     shading: THREE.FlatShading
                 });
-                cube = new THREE.Mesh(geometry, material);
 
-                cube.position.x = i * BRICK_WIDTH;
-                cube.position.z = j * BRICK_DEPTH;
-                cube.position.y = (heightmap[i][j] / 2.0);
+                var cube = new THREE.Mesh(geometry, material);
+
+                cube.position.x = ii * BRICK_WIDTH;
+                cube.position.y = Math.floor(height)*2.0;
+                cube.position.z = jj * BRICK_DEPTH;
                 cube.updateMatrix();
                 cube.matrixAutoUpdate = false;
 
                 scene.add(cube);
+
+                ii = ii+1;
+
+                if(ii == s)
+                {
+                    ii = 0;
+                    jj = jj+1;
+                }
+
             });
-            
         }
     }
 };
 
-var map = [
-    [4.0, 5.0, 6.0],
-    [3.0, 4.0, 5.0],
-    [2.0, 3.0, 4.0]
-];
+var getHeightData = function(img) {
 
-drawLegoLandscape(map, 3);
+    var canvas = document.createElement( 'canvas' );
+    var sq = img.width
+    canvas.width = sq;
+    canvas.height = sq;
+    var context = canvas.getContext( '2d' );
+
+    var size = sq * sq, data = [];
+
+    context.drawImage(img,0,0);
+
+    for ( var i = 0; i < size; i ++ ) {
+        data[i] = 0
+    }
+
+    var imgd = context.getImageData(0, 0, sq, sq);
+    var pix = imgd.data;
+
+    var j=0;
+    for (var i = 0; i < pix.length; i += (4)) {
+        var all = pix[i]+pix[i+1]+pix[i+2];
+        data[j++] = all/30;
+    }
+
+    return data;
+}
+
+var loader = new THREE.ImageLoader();
+var imgPath = 'E_5_256.png';
+
+loader.load(
+    // resource URL
+    imgPath,
+    // Function when resource is loaded
+    function ( image ) {
+        drawLegoLandscape(getHeightData(image), image.width);
+    },
+    // Function called when download progresses
+    function ( xhr ) {
+
+    },
+    // Function called when download errors
+    function ( xhr ) {
+
+    }
+);
 
 var render = function () {
     requestAnimationFrame(render);
@@ -79,3 +137,4 @@ var render = function () {
 };
 
 render();
+
