@@ -110,6 +110,35 @@ var getHeightData = function(img) {
     return data;
 }
 
+var getColours = function(img) {
+
+    var canvas = document.createElement( 'canvas' );
+    var sq = img.width
+    canvas.width = sq;
+    canvas.height = sq;
+    var context = canvas.getContext( '2d' );
+
+    var size = sq * sq, data = [];
+
+    context.drawImage(img,0,0);
+
+    for ( var i = 0; i < size; i ++ ) {
+        data[i] = 0
+    }
+
+    var imgd = context.getImageData(0, 0, sq, sq);
+    var pix = imgd.data;
+
+    var j=0;
+    for (var i = 0; i < pix.length; i += (4)) {
+        var all = [pix[i],pix[i+1],pix[i+2]];
+        data[j++] = all;
+    }
+
+    return data;
+}
+
+
 var loader = new THREE.ImageLoader();
 var imgPath = 'E_5_256.png';
 
