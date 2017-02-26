@@ -7,6 +7,10 @@ const BRICK_DEPTH = 4;
 
 const MAX_HEIGHT = 600; //600 will be good
 
+var scene;
+var renderer;
+var camera;
+
 var init = function () {
     var scene = new THREE.Scene();
     var camera = new THREE.PerspectiveCamera(75, WIDTH / HEIGHT, 0.1, 1000);
