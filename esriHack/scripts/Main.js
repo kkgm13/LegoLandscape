@@ -145,7 +145,7 @@ var getHeightData = function (img) {
     var j = 0;
     for (var i = 0; i < pix.length; i += (4)) {
         var all = pix[i] + pix[i + 1] + pix[i + 2];
-        data[j++] = all / 5;
+        data[j++] = all / 10;
     }
 
     return data;
