@@ -190,14 +190,15 @@ var start = function (imgPath, colourPath) {
     light.position.set(10, 10, 10);
     scene.add(light);
 
-    var light = new THREE.DirectionalLight(0x002288);
-    light.position.set(10, 10, 10);
-    scene.add(light);
+    var light2 = new THREE.DirectionalLight(0x002288);
+    light2.position.set(10, 10, 10);
+    scene.add(light2);
 
-    var light = new THREE.AmbientLight(0xaaaaaa);
-    scene.add(light);
+    var light3 = new THREE.AmbientLight(0xaaaaaa);
+    scene.add(light3);
 
     camera.position.z = 50;
+    camera.position.y = 50;
 
     var loader = new THREE.ImageLoader();
 
