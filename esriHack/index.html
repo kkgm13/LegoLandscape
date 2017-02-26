@@ -2,93 +2,37 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
+	<link rel="stylesheet" type="text/css" href="css/stylesheet.css">
 	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
-	<title>LegoLandScape</title>
+	<title>Lego Landscape</title>
 	<header id="head">
-		<h1>LegoLandScape</h1>
-	</header>
-	<style type="text/css">
-		body {
-			background: #fff;
-			height: 100%;
-			margin: 0; 
-			padding: 0;
-			overflow: hidden;
-			z-index: auto;
-		}
-		canvas {
-			position: relative;
-			top: 0;
-			left: 0;
-			z-index: -1;
-			float: left;
-			border: 1px solid #ffffff
-		}
+		<h1>Lego Landscape</h1>
+		<section id="contents">
+			<p class="content"> <a href="references.html"><b>References</b></a></p>
+			<p class="content">Test 2</p>
+		</section>
 	
-		p {
-			position: relative;
-			left: 0;
-			right: 0;
-			text-align: center;
-			margin: 0;
-			padding: 0.5em 5em;
-			background: rgba(240,240,240,0.7) 
-		}
-		#head {
-			top: 0;
-			border-bottom: 1px solid #999;
-			text-align: center;
-			z-index: 1;
-		}
+	</header>
 
-		#head>h1{
-			text-align: left;
-		}
-
-		#foot {
-			bottom: 0;
-			font-size: 85%;
-			border-top: 1px solid #999;
-			font-style: italic;
-			z-index: 1;
-		}
-
-		#contents{
-			display: flex;
-			flex-wrap: wrap;
-			width: 100%;
-		}
-
-		.content{
-			width: 8.2%;
-			margin: 1%;
-		}
-	</style>
 </head>
 <body>
-	
-	<script src="scripts/three.min.js" id="canvas"></script>
-	<script src="scripts/OrbitControls.js"></script>
-	<script src="scripts/Main.js"></script>
+	<div class="webcanvas">
+		<script src="scripts/three.min.js"></script>
+		<script src="scripts/OrbitControls.js"></script>
+		<script src="scripts/Main.js"></script>
+	</div>
 	
 	<!--Second HTML5 Canvas-->
-	<canvas id="thisCanvas" width="699" height="500"></canvas>
-	<script>
-		var canvas = document.getElementById("thisCanvas");
-		var ctx = canvas.getContext("2d");
-		ctx.fillStyle = "#FF0000";
-		ctx.fillRect(0,0,1000,500);
-	</script>
 	
-	<!--Header and Footer Information-->
-	<footer id="foot">
-		<section id="contents">
-			<p class="content">Test 1</p>
-			<p class="content">Test 2</p>
-			<p class="content">Test 3</p>
-			<p class="content">Test 4</p>
-			<p class="content">Test 5</p>
-		</section>
-	</footer>
-</body>
+	<div class="mapcanvas"> 
+		<canvas id="canvas" width:40% height:40%></canvas>
+		<script>
+			var canvas = document.getElementById("canvas");
+			var ctx = canvas.getContext("2d");
+			ctx.fillStyle = "#FF0000";
+			ctx.fillRect(0,0,1000,500);
+		</script>
+	</div>		
+	</body>
 </html>
